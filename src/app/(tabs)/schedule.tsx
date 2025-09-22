@@ -5,7 +5,8 @@ import { FlatList, RefreshControl, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { Card, Header, Loading, Text } from '@/components/ui';
+import { Loading } from '@/components';
+import { Card, Header, Text } from '@/components/ui';
 import { useScheduledMovies } from '@/hooks/useScheduledMovies';
 import { formatDateToBrazilian, formatTimeToBrazilian } from '@/utils';
 

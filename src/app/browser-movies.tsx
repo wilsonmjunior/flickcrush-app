@@ -32,9 +32,7 @@ export default function BrowserMoviesScreen() {
         <FlatList
           data={movies}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <MovieBrowserCard movie={item} onFavorite={() => {}} onWatched={() => {}} />
-          )}
+          renderItem={({ item }) => <MovieBrowserCard movie={item} />}
           style={styles.list}
           contentContainerStyle={styles.listContent}
           refreshing={isLoading}

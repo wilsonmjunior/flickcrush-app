@@ -7,7 +7,8 @@ import { Animated, Linking, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { MovieTrailers, ScheduleMovieModal } from '@/components';
+import { ScheduleMovieModal } from '@/components';
+import { MovieListTrailers } from '@/components/features/movies';
 import { Button, Header, Text } from '@/components/ui';
 import { useMovieDetails } from '@/hooks/useMovieDetails';
 import { formatRuntime } from '@/utils';
@@ -194,7 +195,7 @@ export default function MovieDetailsScreen() {
           </View>
 
           {/* Trailers Section */}
-          <MovieTrailers videos={trailerVideos ?? []} />
+          <MovieListTrailers videos={trailerVideos ?? []} />
         </View>
       </Animated.ScrollView>
 

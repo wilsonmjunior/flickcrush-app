@@ -5,8 +5,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { useGetLatestMovies, useGetPopularMovies, useGetUpcomingMovies } from '@/api/queries';
-import { MovieBrowserCard } from '@/components';
-import { Header, Loading } from '@/components/ui';
+import { Loading } from '@/components';
+import { MovieBrowserCard } from '@/components/features/movies';
+import { Header } from '@/components/ui';
 
 export default function MovieCategoryScreen() {
   const { category } = useLocalSearchParams();
