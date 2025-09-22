@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { SQLiteProvider } from 'expo-sqlite';
 import { Suspense, useEffect } from 'react';
 import { Text } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import 'react-native-reanimated';
 
@@ -45,6 +46,8 @@ export default function RootLayout() {
       <Suspense fallback={<Text>Loading...</Text>}>
         <SQLiteProvider databaseName="flickcrush.db" onInit={migrate} useSuspense>
           <RootLayoutNav />
+
+          <Toast />
         </SQLiteProvider>
       </Suspense>
     </QueryClientProvider>
