@@ -2,7 +2,7 @@ import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { Text } from './Text';
+import { Text } from '../ui/Text';
 
 export type LoadingProps = {
   size?: 'small' | 'large';

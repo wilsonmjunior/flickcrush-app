@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { ColorToken } from '@/theme';
-import { Text } from '.';
+import { Text } from '../ui';
 
 type ToastProps = {
   text1: string;
