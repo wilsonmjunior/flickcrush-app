@@ -1,4 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -8,6 +9,7 @@ import { Text } from 'react-native';
 
 import 'react-native-reanimated';
 
+import { queryClient } from '@/api/config';
 import { migrate } from '@/database/migrate';
 
 export { ErrorBoundary } from 'expo-router';
@@ -39,11 +41,13 @@ export default function RootLayout() {
   }
 
   return (
-    <Suspense fallback={<Text>Loading...</Text>}>
-      <SQLiteProvider databaseName="flickcrush.db" onInit={migrate} useSuspense>
-        <RootLayoutNav />
-      </SQLiteProvider>
-    </Suspense>
+    <QueryClientProvider client={queryClient}>
+      <Suspense fallback={<Text>Loading...</Text>}>
+        <SQLiteProvider databaseName="flickcrush.db" onInit={migrate} useSuspense>
+          <RootLayoutNav />
+        </SQLiteProvider>
+      </Suspense>
+    </QueryClientProvider>
   );
 }
 
