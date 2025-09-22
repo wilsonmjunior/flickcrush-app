@@ -14,7 +14,13 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.wilsonmjuniorx.flickcrush",
+      "appleTeamId": "X4MY575CF5",
+      "infoPlist": {
+        "NSCalendarsUsageDescription": "Este app precisa acessar seu calendário para agendar filmes e criar lembretes.",
+        "NSRemindersUsageDescription": "Este app precisa acessar seus lembretes para criar notificações de filmes agendados."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -22,7 +28,14 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.wilsonmjuniorx.flickcrush",
+      "permissions": [
+        "READ_CALENDAR",
+        "WRITE_CALENDAR",
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -30,7 +43,22 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-sqlite",
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Este app precisa acessar seu calendário para agendar filmes e criar lembretes."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/icon.png",
+          "color": "#ffffff",
+          "sounds": ["./assets/sounds/notification.mp3"]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
