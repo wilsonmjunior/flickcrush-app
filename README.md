@@ -46,6 +46,7 @@ yarn ios
 
 # Android
 yarn android
+```
 
 ---
 
@@ -64,10 +65,10 @@ yarn android
 | **Unistyles**    | ^3.0.13 | Sistema de estilos               |
 | **Zod**          | ^4.1.9  | Validação de schemas             |
 
+
 ### **Estrutura (Feature-Based)**
 
 ```
-
 src/
 ├── shared/ # Código compartilhado
 │ ├── components/ui/ # Sistema de design
@@ -89,10 +90,7 @@ src/
 │ ├── database/ # Configuração de banco
 │ └── theme/ # Sistema de temas
 └── assets/ # Assets estáticos
-
-````
-
----
+```
 
 ## 🎨 Sistema de Design
 
