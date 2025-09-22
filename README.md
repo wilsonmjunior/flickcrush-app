@@ -47,10 +47,6 @@ yarn ios
 # Android
 yarn android
 
-# Web
-yarn web
-```
-
 ---
 
 ## 🏗️ Arquitetura
@@ -71,46 +67,50 @@ yarn web
 ### **Estrutura Atual**
 
 ```
+
 src/
-├── @types/                    # Tipos TypeScript globais
-├── api/                       # Configuração e queries/mutations
-├── app/                       # Páginas (Expo Router)
-├── components/                # Componentes React
-│   ├── ui/                    # Sistema de design
-│   ├── movie/                 # Componentes de filmes
-│   └── common/                # Componentes comuns
-├── database/                  # Configuração SQLite
-├── hooks/                     # Hooks customizados
-├── models/                    # Schemas Zod
-├── theme/                     # Sistema de temas
-└── utils/                     # Utilitários
+├── @types/ # Tipos TypeScript globais
+├── api/ # Configuração e queries/mutations
+├── app/ # Páginas (Expo Router)
+├── components/ # Componentes React
+│ ├── ui/ # Sistema de design
+│ ├── movie/ # Componentes de filmes
+│ └── common/ # Componentes comuns
+├── database/ # Configuração SQLite
+├── hooks/ # Hooks customizados
+├── models/ # Schemas Zod
+├── theme/ # Sistema de temas
+└── utils/ # Utilitários
+
 ```
 
 ### **Estrutura Proposta (Feature-Based)**
 
 ```
+
 src/
-├── shared/                    # Código compartilhado
-│   ├── components/ui/         # Sistema de design
-│   ├── components/common/     # Componentes comuns
-│   ├── hooks/                 # Hooks compartilhados
-│   └── utils/                 # Utilitários globais
-├── features/                  # Features do app
-│   ├── movies/                # Feature de filmes
-│   │   ├── components/        # Componentes específicos
-│   │   ├── hooks/             # Hooks específicos
-│   │   ├── services/          # Serviços de API
-│   │   └── database/          # Banco local (SQLite)
-│   ├── search/                # Feature de busca
-│   ├── discover/              # Feature de descoberta
-│   ├── schedule/              # Feature de agendamento
-│   └── favorites/             # Feature de favoritos
-├── core/                      # Funcionalidades core
-│   ├── api/                   # Configuração de API
-│   ├── database/              # Configuração de banco
-│   └── theme/                 # Sistema de temas
-└── assets/                    # Assets estáticos
-```
+├── shared/ # Código compartilhado
+│ ├── components/ui/ # Sistema de design
+│ ├── components/common/ # Componentes comuns
+│ ├── hooks/ # Hooks compartilhados
+│ └── utils/ # Utilitários globais
+├── features/ # Features do app
+│ ├── movies/ # Feature de filmes
+│ │ ├── components/ # Componentes específicos
+│ │ ├── hooks/ # Hooks específicos
+│ │ ├── services/ # Serviços de API
+│ │ └── database/ # Banco local (SQLite)
+│ ├── search/ # Feature de busca
+│ ├── discover/ # Feature de descoberta
+│ ├── schedule/ # Feature de agendamento
+│ └── favorites/ # Feature de favoritos
+├── core/ # Funcionalidades core
+│ ├── api/ # Configuração de API
+│ ├── database/ # Configuração de banco
+│ └── theme/ # Sistema de temas
+└── assets/ # Assets estáticos
+
+````
 
 ---
 
@@ -129,7 +129,7 @@ Sistema de design consistente com componentes reutilizáveis:
   </Button.Icon>
   <Button.Label>Favoritar</Button.Label>
 </Button>
-```
+````
 
 #### **Text**
 
@@ -190,7 +190,6 @@ const { scheduleMovie, getScheduled } = useScheduledMovies();
 yarn start          # Inicia o Expo
 yarn ios            # Executa no iOS
 yarn android        # Executa no Android
-yarn web            # Executa no navegador
 
 # Build
 yarn build          # Build de produção
