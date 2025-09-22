@@ -175,6 +175,66 @@ src/
     └── index.ts
 ```
 
+### **Estrutura Proposta (Simplificada)**
+
+```
+src/
+├── @types/                    # Tipos TypeScript globais
+├── app/                       # Páginas (Expo Router)
+│   ├── _layout.tsx
+│   ├── (tabs)/                # Navegação por abas
+│   ├── movie/[id].tsx         # Detalhes do filme
+│   └── search/index.tsx       # Busca
+├── shared/                    # Código compartilhado
+│   ├── components/            # Componentes reutilizáveis
+│   │   ├── ui/                # Sistema de design
+│   │   └── common/            # Componentes comuns
+│   ├── hooks/                 # Hooks compartilhados
+│   ├── utils/                 # Utilitários globais
+│   └── types/                 # Tipos compartilhados
+├── features/                  # Features do app
+│   ├── movies/                # Feature de filmes
+│   │   ├── components/        # Componentes específicos
+│   │   ├── hooks/             # Hooks específicos
+│   │   ├── services/          # Serviços de API
+│   │   └── database/          # Banco local (SQLite)
+│   │       ├── hooks/         # Hooks específicos de filmes
+│   │       └── schemas/       # Schemas locais
+│   ├── search/                # Feature de busca
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   └── services/
+│   ├── discover/              # Feature de descoberta
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   └── services/
+│   ├── schedule/              # Feature de agendamento
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   └── database/          # Banco local (SQLite)
+│   │       ├── hooks/         # Hooks específicos de agendamento
+│   │       └── schemas/       # Schemas locais
+│   └── favorites/             # Feature de favoritos
+│       ├── components/
+│       ├── hooks/
+│       └── services/
+├── core/                      # Funcionalidades core
+│   ├── api/                   # Configuração de API
+│   │   ├── clients/           # Clientes HTTP (TMDB)
+│   │   ├── schemas/           # Schemas de API
+│   │   └── config/            # Configuração global
+│   ├── database/              # Configuração de banco
+│   │   ├── config/            # Configuração SQLite
+│   │   ├── hooks/             # Hooks globais do banco
+│   │   └── schemas/           # Schemas base
+│   └── theme/                 # Sistema de temas
+│       ├── tokens/            # Design tokens
+│       └── themes/            # Temas (light/dark)
+├── assets/                    # Assets estáticos
+└── __tests__/                 # Testes globais
+```
+
 ---
 
 ## 🎨 Sistema de Design
@@ -396,32 +456,45 @@ npm run web      # Web
 
 Durante o desenvolvimento, foram criados documentos de análise e melhoria:
 
-1. **`ANALISE_ESTRUTURA.md`** - Análise completa da estrutura atual
-2. **`ESTRUTURA_COMPONENTES.md`** - Documentação detalhada dos componentes
-3. **`MAPEAMENTO_COMPONENTES.md`** - Mapeamento para nova estrutura
+1. **`ANALISE_ESTRUTURA.md`** - Análise completa da estrutura atual e proposta simplificada
+2. **`README.md`** - Documentação principal do projeto (este arquivo)
 
-### **Sugestões de Melhoria**
+### **Melhorias Implementadas**
 
-#### **Estrutura Proposta (Feature-Based)**
+#### **Estrutura Simplificada (Feature-Based)**
 
 ```
 src/
 ├── shared/                    # Código compartilhado
 │   ├── components/ui/         # Sistema de design
-│   ├── components/layout/     # Layouts
 │   ├── components/common/     # Componentes comuns
 │   ├── hooks/                 # Hooks compartilhados
 │   └── utils/                 # Utilitários globais
 ├── features/                  # Features do app
 │   ├── movies/                # Feature de filmes
+│   │   ├── components/        # Componentes específicos
+│   │   ├── hooks/             # Hooks específicos
+│   │   ├── services/          # Serviços de API
+│   │   └── database/          # Banco local (SQLite)
+│   │       ├── hooks/         # Hooks específicos de filmes
+│   │       └── schemas/       # Schemas locais
 │   ├── search/                # Feature de busca
 │   ├── discover/              # Feature de descoberta
 │   ├── schedule/              # Feature de agendamento
 │   └── favorites/             # Feature de favoritos
-└── core/                      # Funcionalidades core
-    ├── api/                   # Configuração de API
-    ├── database/              # Configuração de banco
-    └── theme/                 # Sistema de temas
+├── core/                      # Funcionalidades core
+│   ├── api/                   # Configuração de API
+│   │   ├── clients/           # Clientes HTTP (TMDB)
+│   │   ├── schemas/           # Schemas de API
+│   │   └── config/            # Configuração global
+│   ├── database/              # Configuração de banco
+│   │   ├── config/            # Configuração SQLite
+│   │   ├── hooks/             # Hooks globais do banco
+│   │   └── schemas/           # Schemas base
+│   └── theme/                 # Sistema de temas
+│       ├── tokens/            # Design tokens
+│       └── themes/            # Temas (light/dark)
+└── assets/                    # Assets estáticos
 ```
 
 #### **Benefícios da Nova Estrutura**
@@ -429,8 +502,33 @@ src/
 - ✅ **Organização:** Componentes agrupados por feature
 - ✅ **Manutenibilidade:** Mudanças isoladas por feature
 - ✅ **Escalabilidade:** Fácil adição de novas features
-- ✅ **Performance:** Lazy loading e code splitting
+- ✅ **Separação:** Schemas de API vs banco local
+- ✅ **Hooks SQLite:** Organizados por funcionalidade
 - ✅ **Desenvolvimento:** Onboarding mais rápido
+
+#### **Hooks SQLite Organizados**
+
+**Hooks Globais:**
+
+```
+core/database/hooks/
+├── useDatabase.ts         # Hook base para SQLite
+├── useMigrations.ts       # Hook para migrações
+└── index.ts
+```
+
+**Hooks por Feature:**
+
+```
+features/movies/database/hooks/
+├── useFavoriteMovies.ts   # Hooks para favoritos
+├── useWatchedMovies.ts    # Hooks para assistidos
+└── index.ts
+
+features/schedule/database/hooks/
+├── useScheduledMovies.ts  # Hooks para agendados
+└── index.ts
+```
 
 ---
 
@@ -549,16 +647,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 - GitHub: [@wilsonmjuniorx](https://github.com/wilsonmjuniorx)
 - LinkedIn: [Wilson Junior](https://linkedin.com/in/wilsonmjuniorx)
-
----
-
-## 📞 Suporte
-
-Se você encontrar algum problema ou tiver sugestões:
-
-1. **Abra uma issue** no GitHub
-2. **Entre em contato** via email
-3. **Consulte a documentação** dos componentes
 
 ---
 
