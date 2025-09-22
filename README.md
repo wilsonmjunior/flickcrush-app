@@ -64,27 +64,7 @@ yarn android
 | **Unistyles**    | ^3.0.13 | Sistema de estilos               |
 | **Zod**          | ^4.1.9  | Validação de schemas             |
 
-### **Estrutura Atual**
-
-```
-
-src/
-├── @types/ # Tipos TypeScript globais
-├── api/ # Configuração e queries/mutations
-├── app/ # Páginas (Expo Router)
-├── components/ # Componentes React
-│ ├── ui/ # Sistema de design
-│ ├── movie/ # Componentes de filmes
-│ └── common/ # Componentes comuns
-├── database/ # Configuração SQLite
-├── hooks/ # Hooks customizados
-├── models/ # Schemas Zod
-├── theme/ # Sistema de temas
-└── utils/ # Utilitários
-
-```
-
-### **Estrutura Proposta (Feature-Based)**
+### **Estrutura (Feature-Based)**
 
 ```
 
