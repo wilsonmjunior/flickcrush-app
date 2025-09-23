@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 import { ImageBackground } from 'expo-image';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef } from 'react';
 import { Animated, Linking, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,7 +9,6 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { MovieListTrailers } from '@/features/movies/components';
 import { useMovieDetails } from '@/features/movies/hooks';
-import { ScheduleMovieModal } from '@/features/schedule/components';
 import { Button, Header, Text } from '@/shared/components/ui';
 import { formatRuntime } from '@/shared/utils';
 
@@ -19,6 +18,8 @@ const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 export default function MovieDetailsScreen() {
   const scrollY = useRef(new Animated.Value(0)).current;
+
+  const router = useRouter();
 
   const { theme } = useUnistyles();
 
@@ -59,16 +60,12 @@ export default function MovieDetailsScreen() {
     trailerVideos,
     watchedIcon,
     favoriteIcon,
+    isMovieScheduled,
     scheduleButtonIcon,
     scheduleButtonText,
-    isMovieScheduled,
-    isScheduleModalVisible,
     handleWatched,
     handleFavorite,
-    handleScheduleMovie,
-    handleUnscheduleMovie,
-    handleConfirmSchedule,
-    handleCloseScheduleModal,
+    handleSchedule,
   } = useMovieDetails({ movieId: Number(id) });
 
   return (
@@ -203,7 +200,11 @@ export default function MovieDetailsScreen() {
         <View style={styles.buttonScheduleContainer}>
           <Button
             size="lg"
-            onPress={isMovieScheduled ? handleUnscheduleMovie : handleScheduleMovie}
+            onPress={() =>
+              isMovieScheduled
+                ? handleSchedule(new Date(), new Date())
+                : router.push(`/schedule/${movie?.id}`)
+            }
           >
             <Button.Icon>
               <MaterialCommunityIcons
@@ -236,13 +237,6 @@ export default function MovieDetailsScreen() {
           </Button.Icon>
         </Button>
       </View>
-
-      <ScheduleMovieModal
-        visible={isScheduleModalVisible}
-        onClose={handleCloseScheduleModal}
-        onSchedule={handleConfirmSchedule}
-        movieTitle={movie?.title ?? ''}
-      />
     </SafeAreaView>
   );
 }

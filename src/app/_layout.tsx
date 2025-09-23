@@ -59,7 +59,8 @@ function RootLayoutNav() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="(tabs)" />
       <Stack.Screen name="browser-movies" />
-      <Stack.Screen name="movie" />
+      <Stack.Screen name="movie/[id]" />
+      <Stack.Screen name="schedule/[movie]" options={{ presentation: 'modal' }} />
     </Stack>
   );
 }

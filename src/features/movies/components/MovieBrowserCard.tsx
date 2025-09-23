@@ -1,5 +1,6 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useCallback } from 'react';
 import { useUnistyles } from 'react-native-unistyles';
 
 import { useGetIsFavoriteMovie, useGetIsWatchedMovie } from '@/core/api/queries';
@@ -24,6 +25,10 @@ export function MovieBrowserCard({ movie }: MovieBrowserCardProps) {
   const { handleFavorite, favoriteIcon } = useFavoriteMovie(isFavoriteMovie ?? false);
   const { handleWatched, watchedIcon } = useWatchedMovie(isWatchedMovie ?? false);
 
+  const handleSchedule = useCallback(() => {
+    router.push(`/schedule/${movie.id}`);
+  }, [movie.id, router]);
+
   return (
     <Card onPress={() => router.push(`/movie/${movie.id}`)}>
       <Card.Row>
@@ -42,7 +47,7 @@ export function MovieBrowserCard({ movie }: MovieBrowserCardProps) {
           </Card.Row>
 
           <Card.Row>
-            <Button>
+            <Button onPress={handleSchedule}>
               <Button.Icon>
                 <MaterialCommunityIcons
                   name="calendar-outline"

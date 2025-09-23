@@ -1,3 +1,3 @@
 export * from './useCalendarIntegration';
-export * from './useScheduledMovies';
+export * from './useScheduleMovie';
 
