@@ -342,6 +342,8 @@ yarn type-check     # Verifica tipos TypeScript
 <img width="200" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 42" src="https://github.com/user-attachments/assets/a296a517-034f-4e6a-8e35-9110b73ae17b" />
 <img width="200" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 46 08" src="https://github.com/user-attachments/assets/7208419e-3b6e-4084-8439-ce0f90030ff2" />
 
+---
+
 **Navegação por Abas:**
 
 - **Material Icons** - Ícones consistentes
