@@ -5,10 +5,10 @@ import { FlatList, RefreshControl, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { useScheduledMovies } from '@/features/schedule/hooks/useScheduledMovies';
+import { ScheduleMovieCard } from '@/features/schedule/components';
+import { useScheduledMovies } from '@/features/schedule/hooks';
 import { Loading } from '@/shared/components/common';
-import { Card, Header, Text } from '@/shared/components/ui';
-import { formatDateToBrazilian, formatTimeToBrazilian } from '@/shared/utils';
+import { Header, Text } from '@/shared/components/ui';
 
 export default function ScheduleScreen() {
   const { theme } = useUnistyles();
@@ -17,44 +17,6 @@ export default function ScheduleScreen() {
 
   const handleMoviePress = (tmdbId: number) => {
     router.push(`/movie/${tmdbId}`);
-  };
-
-  const renderScheduledMovie = ({ item }: { item: any }) => {
-    const scheduledDate = new Date(item.scheduled_date);
-    const formattedDate = formatDateToBrazilian(scheduledDate);
-    const formattedTime = formatTimeToBrazilian(new Date(`2000-01-01T${item.scheduled_time}`));
-
-    return (
-      <Card variant="outline" onPress={() => handleMoviePress(item.tmdb_id)}>
-        <Card.Row>
-          <Card.Image
-            uri={
-              item.poster_path
-                ? `https://image.tmdb.org/t/p/w200${item.poster_path}`
-                : 'https://via.placeholder.com/200x300?text=No+Image'
-            }
-            size="sm"
-          />
-          <Card.Column>
-            <Card.Title numberOfLines={2}>{item.title}</Card.Title>
-            <View style={styles.dateTimeContainer}>
-              <View style={styles.dateTimeItem}>
-                <MaterialCommunityIcons name="calendar" size={16} color={theme.colors.primary} />
-                <Text variant="body" size="md" color="muted">
-                  {formattedDate}
-                </Text>
-              </View>
-              <View style={styles.dateTimeItem}>
-                <MaterialCommunityIcons name="clock" size={16} color={theme.colors.primary} />
-                <Text variant="body" size="md" color="muted">
-                  {formattedTime}
-                </Text>
-              </View>
-            </View>
-          </Card.Column>
-        </Card.Row>
-      </Card>
-    );
   };
 
   const renderEmptyState = () => (
@@ -89,7 +51,9 @@ export default function ScheduleScreen() {
       <FlatList
         data={scheduledMovies || []}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={renderScheduledMovie}
+        renderItem={({ item }) => (
+          <ScheduleMovieCard movie={item} onPress={() => handleMoviePress(item.tmdb_id)} />
+        )}
         contentContainerStyle={styles.listContainer}
         showsVerticalScrollIndicator={false}
         refreshControl={
