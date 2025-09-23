@@ -5,8 +5,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { useGetFavoriteMovies, useGetWatchedMovies } from '@/core/api/queries';
+import { MovieCard } from '@/features/movies/components';
 import { MovieGridSkeleton } from '@/features/movies/components/MovieGridSkeleton';
-import { Button, Card, Header } from '@/shared/components/ui';
+import { Button, Header } from '@/shared/components/ui';
 
 const listCategories = {
   WANT_TO_WATCH: {
@@ -77,9 +78,7 @@ export default function MyListScreen() {
           data={watchedMovies}
           keyExtractor={(item) => item.tmdb_id.toString()}
           renderItem={({ item }) => (
-            <Card onPress={() => router.push(`/movie/${item.tmdb_id}`)}>
-              <Card.Image uri={`https://image.tmdb.org/t/p/w500${item.poster_path}`} />
-            </Card>
+            <MovieCard movie={item} onPress={() => router.push(`/movie/${item.tmdb_id}`)} />
           )}
           numColumns={3}
           columnWrapperStyle={styles.columnWrapper}
@@ -90,9 +89,7 @@ export default function MyListScreen() {
           data={favoriteMovies}
           keyExtractor={(item) => item.tmdb_id.toString()}
           renderItem={({ item }) => (
-            <Card onPress={() => router.push(`/movie/${item.tmdb_id}`)}>
-              <Card.Image uri={`https://image.tmdb.org/t/p/w500${item.poster_path}`} />
-            </Card>
+            <MovieCard movie={item} onPress={() => router.push(`/movie/${item.tmdb_id}`)} />
           )}
           numColumns={3}
           columnWrapperStyle={styles.columnWrapper}
