@@ -54,42 +54,58 @@ yarn android
 
 ### **Stack Tecnológica**
 
-| Tecnologia       | Versão  | Propósito                        |
-| ---------------- | ------- | -------------------------------- |
-| **React Native** | 0.81.4  | Framework mobile                 |
-| **Expo**         | ~54.0.9 | Plataforma de desenvolvimento    |
-| **TypeScript**   | ~5.9.2  | Tipagem estática                 |
-| **Expo Router**  | ~6.0.7  | Navegação                        |
-| **React Query**  | ^5.89.0 | Gerenciamento de estado servidor |
-| **SQLite**       | ~16.0.8 | Banco de dados local             |
-| **Unistyles**    | ^3.0.13 | Sistema de estilos               |
-| **Zod**          | ^4.1.9  | Validação de schemas             |
+| Tecnologia                     | Versão   | Propósito                        |
+| ------------------------------ | -------- | -------------------------------- |
+| **React Native**               | 0.81.4   | Framework mobile                 |
+| **Expo**                       | ~54.0.9  | Plataforma de desenvolvimento    |
+| **TypeScript**                 | ~5.9.2   | Tipagem estática                 |
+| **Expo Router**                | ~6.0.7   | Navegação baseada em arquivos    |
+| **TanStack Query**             | ^5.89.0  | Gerenciamento de estado servidor |
+| **Expo SQLite**                | ~16.0.8  | Banco de dados local             |
+| **React Native Unistyles**     | ^3.0.13  | Sistema de estilos responsivo    |
+| **Zod**                        | ^4.1.9   | Validação de schemas             |
+| **React Native Reanimated**    | ^4.1.0   | Animações nativas                |
+| **Expo Image**                 | ~3.0.8   | Otimização de imagens            |
+| **React Native Toast Message** | ^2.3.3   | Notificações toast               |
+| **Expo Calendar**              | ~15.0.7  | Integração com calendário        |
+| **Expo Notifications**         | ~0.32.11 | Notificações push                |
 
-
-### **Estrutura (Feature-Based)**
+### **Estrutura do Projeto**
 
 ```
 src/
-├── shared/ # Código compartilhado
-│ ├── components/ui/ # Sistema de design
-│ ├── components/common/ # Componentes comuns
-│ ├── hooks/ # Hooks compartilhados
-│ └── utils/ # Utilitários globais
-├── features/ # Features do app
-│ ├── movies/ # Feature de filmes
-│ │ ├── components/ # Componentes específicos
-│ │ ├── hooks/ # Hooks específicos
-│ │ ├── services/ # Serviços de API
-│ │ └── database/ # Banco local (SQLite)
-│ ├── search/ # Feature de busca
-│ ├── discover/ # Feature de descoberta
-│ ├── schedule/ # Feature de agendamento
-│ └── favorites/ # Feature de favoritos
-├── core/ # Funcionalidades core
-│ ├── api/ # Configuração de API
-│ ├── database/ # Configuração de banco
-│ └── theme/ # Sistema de temas
-└── assets/ # Assets estáticos
+├── app/                    # 📱 Telas (Expo Router)
+│   ├── (tabs)/            # Abas principais
+│   │   ├── index.tsx      # 🏠 Home
+│   │   ├── browser.tsx    # 🔍 Explorar
+│   │   ├── my-list.tsx    # 📋 Minha Lista
+│   │   └── schedule.tsx   # 📅 Agendados
+│   └── movie/[id]/        # 🎬 Detalhes do filme
+│
+├── components/             # 🧩 Componentes
+│   ├── ui/                # Design System
+│   │   ├── Button.tsx     # Botões
+│   │   ├── Card.tsx       # Cards de filme
+│   │   └── Text.tsx       # Textos
+│   └── features/          # Componentes específicos
+│       ├── movies/        # Listas de filmes
+│       └── schedule/      # Agendamento
+│
+├── api/                   # 🌐 Integração com APIs
+│   ├── queries/           # Buscar dados (TMDB)
+│   └── mutations/         # Salvar dados (favoritos)
+│
+├── database/              # 💾 Banco local (SQLite)
+│   ├── useFavoriteMoviesDatabase.ts
+│   └── useScheduledMoviesDatabase.ts
+│
+├── hooks/                 # 🎣 Lógica reutilizável
+│   ├── useMovieDetails.ts
+│   └── useScheduledMovies.ts
+│
+└── models/                # 📋 Validação (Zod)
+    ├── MovieSchema.ts
+    └── FavoriteMovieSchema.ts
 ```
 
 ## 🎨 Sistema de Design
@@ -107,7 +123,7 @@ Sistema de design consistente com componentes reutilizáveis:
   </Button.Icon>
   <Button.Label>Favoritar</Button.Label>
 </Button>
-````
+```
 
 #### **Text**
 
@@ -148,13 +164,32 @@ Sistema de design consistente com componentes reutilizáveis:
 
 ```typescript
 // Hook para favoritos
-const { addFavorite, removeFavorite, getFavorites } = useFavoriteMovies();
+const { addFavorite, removeFavorite, getFavorites } = useFavoriteMoviesDatabase();
 
 // Hook para assistidos
-const { markAsWatched, getWatched } = useWatchedMovies();
+const { markAsWatched, getWatched } = useWatchedMoviesDatabase();
 
 // Hook para agendados
-const { scheduleMovie, getScheduled } = useScheduledMovies();
+const { scheduleMovie, getScheduled } = useScheduledMoviesDatabase();
+```
+
+### **Hooks Customizados**
+
+```typescript
+// Hook para detalhes do filme
+const { movie, trailerVideos, handleWatched, handleFavorite } = useMovieDetails({ movieId });
+
+// Hook para agendamento
+const { data: scheduledMovies, scheduleMovie, unscheduleMovie } = useScheduledMovies();
+
+// Hook para favoritos
+const { addFavorite, removeFavorite, isFavorite } = useFavoriteMovie();
+
+// Hook para assistidos
+const { markAsWatched, unmarkAsWatched, isWatched } = useWatchedMovie();
+
+// Hook para integração com calendário
+const { addToCalendar, removeFromCalendar } = useCalendarIntegration();
 ```
 
 ---
@@ -174,97 +209,144 @@ yarn build          # Build de produção
 yarn build:ios      # Build para iOS
 yarn build:android  # Build para Android
 
-# Testes
-yarn test           # Executa testes
-yarn test:watch     # Testes em modo watch
-yarn test:coverage  # Cobertura de testes
-
 # Qualidade
 yarn lint           # Verifica código
 yarn lint:fix       # Corrige problemas
 yarn type-check     # Verifica tipos TypeScript
 ```
 
-### **Estrutura de Testes**
+---
 
-```
-__tests__/
-├── components/     # Testes de componentes
-├── hooks/         # Testes de hooks
-├── utils/         # Testes de utilitários
-└── __mocks__/     # Mocks globais
-```
+## 📱 Funcionalidades Implementadas
+
+### **🏠 Home (Tela Principal)**
+
+- **Filmes em Cartaz** - Carrossel com filmes atualmente em exibição
+- **Próximos Lançamentos** - Lista de filmes que serão lançados em breve
+- **Filmes Populares** - Ranking dos filmes mais populares
+- **Últimos Lançamentos** - Filmes recém-lançados
+- **Navegação por Categorias** - Acesso rápido a diferentes seções
+
+### **🔍 Explorar**
+
+- **Descoberta de Filmes** - Lista infinita de filmes com paginação
+- **Filtros por Gênero** - Categorização por tipos de filme
+- **Busca Avançada** - Pesquisa por título, gênero e ano
+- **Interface Responsiva** - Adaptação para diferentes tamanhos de tela
+
+### **📋 Minha Lista**
+
+- **Favoritos** - Filmes marcados como favoritos
+- **Assistidos** - Histórico de filmes já vistos
+- **Alternância de Categorias** - Botões para alternar entre favoritos e assistidos
+- **Visualização em Grid** - Layout otimizado para visualização
+
+### **📅 Agendados**
+
+- **Agendamento de Filmes** - Marcar filmes para assistir em data específica
+- **Seleção de Data e Hora** - Interface para escolher quando assistir
+- **Lista de Agendamentos** - Visualização de todos os filmes agendados
+- **Integração com Calendário** - Sincronização com calendário do dispositivo
+- **Estado Vazio** - Interface amigável quando não há agendamentos
+
+### **🎬 Detalhes do Filme**
+
+- **Header Animado** - Imagem de fundo com animações de scroll
+- **Informações Completas** - Título, sinopse, gêneros, duração, avaliação
+- **Trailers e Vídeos** - Reprodução de trailers do YouTube
+- **Ações Rápidas** - Botões para favoritar, marcar como assistido e agendar
+- **Site Oficial** - Link para página oficial do filme
+
+### **🎨 Interface e UX**
+
+- **Tema Escuro/Claro** - Alternância automática baseada no sistema
+- **Animações Suaves** - Transições fluidas com React Native Reanimated
+- **Skeleton Loading** - Estados de carregamento elegantes
+- **Feedback Visual** - Toast notifications para ações do usuário
+- **Navegação Intuitiva** - Expo Router com navegação baseada em arquivos
+- **Design Responsivo** - Adaptação para diferentes dispositivos
 
 ---
 
-## 📱 Funcionalidades Detalhadas
+## 🚀 Arquitetura Implementada
 
-### **Descoberta de Filmes**
+### **📁 Estrutura Modular**
 
-- Lista de filmes populares com paginação
-- Filmes em cartaz nos cinemas
-- Próximos lançamentos
-- Filtros por gênero e ano
-- Busca em tempo real
+- ✅ **Navegação por Arquivos** - Expo Router com estrutura baseada em pastas
+- ✅ **Separação de Responsabilidades** - API, componentes, hooks e banco separados
+- ✅ **Componentes Reutilizáveis** - Sistema de design consistente
+- ✅ **Hooks Customizados** - Lógica de negócio encapsulada
+- ✅ **Validação de Dados** - Schemas Zod para type safety
 
-### **Gerenciamento Pessoal**
+### **🗄️ Banco de Dados Local**
 
-- Adicionar/remover favoritos
-- Marcar filmes como assistidos
-- Agendar filmes para assistir
-- Histórico de visualização
-- Sincronização com calendário
+**Estrutura SQLite:**
 
-### **Interface e UX**
+- **Favoritos** - `useFavoriteMoviesDatabase.ts`
+- **Assistidos** - `useWatchedMoviesDatabase.ts`
+- **Agendados** - `useScheduledMoviesDatabase.ts`
+- **Migrações** - Sistema de versionamento do banco
 
-- Design responsivo
-- Animações suaves
-- Skeleton loading
-- Feedback visual
-- Navegação intuitiva
+### **🎨 Sistema de Design**
 
----
+**Componentes UI:**
 
-## 🚀 Melhorias Implementadas
+- **Button** - Botões com variantes e tamanhos
+- **Card** - Cards para filmes com imagens e conteúdo
+- **Text** - Tipografia consistente
+- **Header** - Cabeçalhos com ações
+- **Input** - Campos de entrada
+- **Skeleton** - Estados de carregamento
 
-### **Estrutura Feature-Based**
+**Temas:**
 
-- ✅ **Organização** - Componentes agrupados por feature
-- ✅ **Manutenibilidade** - Mudanças isoladas por feature
-- ✅ **Escalabilidade** - Fácil adição de novas features
-- ✅ **Separação** - Schemas de API vs banco local
-- ✅ **Hooks SQLite** - Organizados por funcionalidade
+- **Tema Escuro** - Cores cinematográficas
+- **Tema Claro** - Interface moderna e limpa
+- **Adaptativo** - Alternância automática baseada no sistema
 
-### **Hooks SQLite Organizados**
+### **🔌 Integração com APIs**
 
-**Hooks Globais:**
+**TMDB (The Movie Database):**
 
-```
-core/database/hooks/
-├── useDatabase.ts         # Hook base para SQLite
-├── useMigrations.ts       # Hook para migrações
-└── index.ts
-```
+- **Filmes Populares** - Lista de filmes em alta
+- **Filmes em Cartaz** - Filmes atualmente em exibição
+- **Próximos Lançamentos** - Filmes que serão lançados
+- **Detalhes do Filme** - Informações completas
+- **Trailers** - Vídeos do YouTube
+- **Busca** - Pesquisa por título e filtros
 
-**Hooks por Feature:**
+**React Query:**
 
-```
-features/movies/database/hooks/
-├── useFavoriteMovies.ts   # Hooks para favoritos
-├── useWatchedMovies.ts    # Hooks para assistidos
-└── index.ts
+- **Cache Inteligente** - Otimização de requisições
+- **Estados de Loading** - Feedback visual
+- **Refetch Automático** - Atualização de dados
+- **Mutations** - Operações de escrita
 
-features/schedule/database/hooks/
-├── useScheduledMovies.ts  # Hooks para agendados
-└── index.ts
-```
+### **🧭 Navegação**
+
+**Estrutura de Telas:**
+
+- **Home** - Tela principal com filmes em destaque
+- **Explorar** - Descoberta de filmes com filtros
+- **Minha Lista** - Favoritos e assistidos
+- **Agendados** - Filmes agendados para assistir
+- **Detalhes** - Página individual do filme
+- **Busca** - Tela de pesquisa avançada
+
+**Navegação por Abas:**
+
+- **Material Icons** - Ícones consistentes
+- **Tema Adaptativo** - Cores que seguem o tema
+- **Badges** - Indicadores de estado
+- **Animações** - Transições suaves
 
 ---
 
 ## 📚 Documentação
 
-- **`ESTRUTURA_FEATURE_BASED.md`** - Proposta de arquitetura feature-based
 - **`README.md`** - Documentação principal do projeto (este arquivo)
+- **Código Comentado** - Documentação inline no código
+- **TypeScript** - Tipagem para melhor documentação
 
 ---
 
