@@ -79,12 +79,12 @@ export function ScheduleMovieModal({
               </Text>
               <Button
                 variant="outline"
-                type="primary"
+                type="secondary"
                 size="lg"
                 onPress={() => setShowDatePicker(true)}
               >
                 <Button.Icon>
-                  <MaterialCommunityIcons name="calendar" size={20} color={theme.colors.shape} />
+                  <MaterialCommunityIcons name="calendar" size={18} color={theme.colors.muted} />
                 </Button.Icon>
                 <Button.Label>{formatDateToBrazilian(selectedDate)}</Button.Label>
               </Button>
@@ -96,12 +96,12 @@ export function ScheduleMovieModal({
               </Text>
               <Button
                 variant="outline"
-                type="primary"
+                type="secondary"
                 size="lg"
                 onPress={() => setShowTimePicker(true)}
               >
                 <Button.Icon>
-                  <MaterialCommunityIcons name="clock" size={20} color={theme.colors.shape} />
+                  <MaterialCommunityIcons name="clock" size={18} color={theme.colors.muted} />
                 </Button.Icon>
                 <Button.Label>{formatTimeToBrazilian(selectedTime)}</Button.Label>
               </Button>
@@ -119,8 +119,6 @@ export function ScheduleMovieModal({
               <Button.Label>Cancelar</Button.Label>
             </Button>
             <Button
-              variant="filled"
-              type="primary"
               size="lg"
               loading={!canSchedule}
               onPress={handleSchedule}
