@@ -4,6 +4,18 @@
 
 App mobile para cinéfilos desenvolvido em React Native/Expo com integração TMDB.
 
+## Telas
+<img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 31" src="https://github.com/user-attachments/assets/57274e09-05f3-4718-b7d1-79ba94ab19a4" />
+<img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 27" src="https://github.com/user-attachments/assets/2d2d0585-00c8-4191-83af-67df7aadb1df" />
+<img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 22" src="https://github.com/user-attachments/assets/0fa3bdd9-2c99-49d0-b788-a9bebf5fbada" />
+<img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 24" src="https://github.com/user-attachments/assets/85c8e0fa-a958-4e22-a5dc-aac864356488" />
+<img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 18" src="https://github.com/user-attachments/assets/cd6841be-2105-4cb5-bd16-d7efe0a11f2b" />
+<img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 35" src="https://github.com/user-attachments/assets/ca8f1bd9-889d-4fd9-b1d2-38437a14f006" />
+<img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 42" src="https://github.com/user-attachments/assets/a296a517-034f-4e6a-8e35-9110b73ae17b" />
+<img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 42" src="https://github.com/user-attachments/assets/0ffa437b-201d-4fb9-990e-e02b4c5d6d19" />
+
+
+
 ## ✨ Funcionalidades
 
 - 🎯 **Descoberta** - Filmes populares, em cartaz e próximos lançamentos
