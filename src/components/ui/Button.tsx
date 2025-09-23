@@ -134,7 +134,7 @@ function ButtonLabel({ children }: ButtonLabelProps) {
   });
 
   const getTextColor = (): ColorToken => {
-    if (isDisabled) return 'muted';
+    if (isDisabled) return 'text';
     if (variant === 'filled') return 'white';
     switch (type) {
       case 'primary':
