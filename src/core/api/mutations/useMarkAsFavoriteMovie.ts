@@ -12,7 +12,6 @@ export function useMarkAsFavoriteMovie(
   return useMutation({
     mutationKey: [markAsFavoriteMovieKey],
     mutationFn: async (data: FavoriteMovieSchemaType) => {
-      console.log('markAsFavorite mutation called with data:', data);
       return await markAsFavorite(data);
     },
     ...props,

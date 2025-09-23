@@ -45,7 +45,6 @@ class TMDbClient {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        console.log('errorData: ', errorData);
         throw new Error(
           `TMDb API Error: ${response.status} - ${errorData.status_message || response.statusText}`
         );

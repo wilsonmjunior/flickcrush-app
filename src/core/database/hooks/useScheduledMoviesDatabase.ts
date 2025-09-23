@@ -123,7 +123,6 @@ export function useScheduledMoviesDatabase() {
       if (!row) return null;
       return ScheduledMovieResponseSchema.parse(row);
     } catch (error) {
-      console.log('error:getScheduledMovie', error);
       return null;
     }
   }
@@ -143,7 +142,6 @@ export function useScheduledMoviesDatabase() {
 
       return Boolean(row);
     } catch (error) {
-      console.log('error:isMovieScheduled', error);
       return false;
     }
   }

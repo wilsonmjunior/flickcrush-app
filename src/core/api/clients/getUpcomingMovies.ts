@@ -23,7 +23,6 @@ export async function getUpcomingMovies(page: number) {
     const parsedResponse = UpcomingMovieSchema.parse(response);
     return parsedResponse;
   } catch (error) {
-    console.log('error::gay: ', error);
     throw new TMDBAPIError(error as string, 500);
   }
 }

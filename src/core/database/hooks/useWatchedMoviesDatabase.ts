@@ -73,7 +73,6 @@ export function useWatchedMoviesDatabase() {
 
       return Boolean(row);
     } catch (error) {
-      console.log('error:isWatched', error);
       return false;
     }
   }
