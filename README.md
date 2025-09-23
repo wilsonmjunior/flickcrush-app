@@ -173,25 +173,10 @@ yarn build          # Build de produção
 yarn build:ios      # Build para iOS
 yarn build:android  # Build para Android
 
-# Testes
-yarn test           # Executa testes
-yarn test:watch     # Testes em modo watch
-yarn test:coverage  # Cobertura de testes
-
 # Qualidade
 yarn lint           # Verifica código
 yarn lint:fix       # Corrige problemas
 yarn type-check     # Verifica tipos TypeScript
-```
-
-### **Estrutura de Testes**
-
-```
-__tests__/
-├── components/     # Testes de componentes
-├── hooks/         # Testes de hooks
-├── utils/         # Testes de utilitários
-└── __mocks__/     # Mocks globais
 ```
 
 ---
