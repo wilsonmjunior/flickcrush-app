@@ -4,9 +4,9 @@ import { useMemo } from 'react';
 import { View } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { useGetDiscoverMovies } from '@/api/queries';
-import { DiscoverMovies } from '@/components';
-import { Header } from '@/components/ui';
+import { useGetDiscoverMovies } from '@/core/api/queries';
+import { DiscoverMovies } from '@/features/discover';
+import { Header } from '@/shared/components/ui';
 
 export default function BrowserScreen() {
   const { theme } = useUnistyles();

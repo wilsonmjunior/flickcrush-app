@@ -2,9 +2,10 @@ import { useCallback, useMemo, useState } from 'react';
 import { FlatList } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { useSearchMovies } from '@/api/queries';
-import { MovieBrowserCard, SearchHeader, SearchMoviesSkeleton } from '@/components';
-import { useDebounce } from '@/hooks/useDebounce';
+import { useSearchMovies } from '@/core/api/queries';
+import { MovieBrowserCard } from '@/features/movies/components';
+import { SearchHeader, SearchMoviesSkeleton } from '@/features/search/components';
+import { useDebounce } from '@/shared/hooks';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function BrowserMoviesScreen() {

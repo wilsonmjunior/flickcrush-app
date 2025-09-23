@@ -10,8 +10,8 @@ import Toast from 'react-native-toast-message';
 
 import 'react-native-reanimated';
 
-import { queryClient } from '@/api/config';
-import { migrate } from '@/database/migrate';
+import { queryClient } from '@/core/api/config';
+import { migrate } from '@/core/database/config/migrate';
 
 export { ErrorBoundary } from 'expo-router';
 

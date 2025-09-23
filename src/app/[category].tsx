@@ -4,10 +4,10 @@ import { FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { useGetLatestMovies, useGetPopularMovies, useGetUpcomingMovies } from '@/api/queries';
-import { Loading } from '@/components';
-import { MovieBrowserCard } from '@/components/features/movies';
-import { Header } from '@/components/ui';
+import { useGetLatestMovies, useGetPopularMovies, useGetUpcomingMovies } from '@/core/api/queries';
+import { MovieBrowserCard } from '@/features/movies/components';
+import { Loading } from '@/shared/components/common';
+import { Header } from '@/shared/components/ui';
 
 export default function MovieCategoryScreen() {
   const { category } = useLocalSearchParams();

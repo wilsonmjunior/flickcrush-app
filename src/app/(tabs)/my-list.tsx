@@ -4,9 +4,9 @@ import { FlatList, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { useGetFavoriteMovies, useGetWatchedMovies } from '@/api/queries';
-import { MovieGridSkeleton } from '@/components/features/movies/MovieGridSkeleton';
-import { Button, Card, Header } from '@/components/ui';
+import { useGetFavoriteMovies, useGetWatchedMovies } from '@/core/api/queries';
+import { MovieGridSkeleton } from '@/features/movies/components/MovieGridSkeleton';
+import { Button, Card, Header } from '@/shared/components/ui';
 
 const listCategories = {
   WANT_TO_WATCH: {

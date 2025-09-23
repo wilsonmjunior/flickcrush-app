@@ -8,8 +8,8 @@ import {
   useGetNowPlayingMovies,
   useGetPopularMovies,
   useGetUpcomingMovies,
-} from '@/api/queries';
-import { MovieList, MovieListNowPlaying } from '@/components';
+} from '@/core/api/queries';
+import { MovieList, MovieListNowPlaying } from '@/features/movies/components';
 
 export default function HomeScreen() {
   const router = useRouter();
