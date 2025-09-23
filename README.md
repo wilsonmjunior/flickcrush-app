@@ -12,8 +12,6 @@ App mobile para cinéfilos desenvolvido em React Native/Expo com integração TM
 <img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 18" src="https://github.com/user-attachments/assets/cd6841be-2105-4cb5-bd16-d7efe0a11f2b" />
 <img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 35" src="https://github.com/user-attachments/assets/ca8f1bd9-889d-4fd9-b1d2-38437a14f006" />
 <img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 42" src="https://github.com/user-attachments/assets/a296a517-034f-4e6a-8e35-9110b73ae17b" />
-<img width="300" alt="Simulator Screenshot - iPhone 16e - 2025-09-22 at 22 30 42" src="https://github.com/user-attachments/assets/0ffa437b-201d-4fb9-990e-e02b4c5d6d19" />
-
 
 
 ## ✨ Funcionalidades
