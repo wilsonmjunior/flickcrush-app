@@ -5,7 +5,7 @@ import { Skeleton } from '@/shared/components/ui';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-export function SearchMoviesSkeleton() {
+export function MovieListVerticalSkeleton() {
   const { theme } = useUnistyles();
 
   return (

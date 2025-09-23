@@ -4,7 +4,8 @@ import { StyleSheet } from 'react-native-unistyles';
 
 import { useSearchMovies } from '@/core/api/queries';
 import { MovieBrowserCard } from '@/features/movies/components';
-import { SearchHeader, SearchMoviesSkeleton } from '@/features/search/components';
+import { SearchHeader } from '@/features/search/components';
+import { MovieListVerticalSkeleton } from '@/shared/components/common';
 import { useDebounce } from '@/shared/hooks';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -28,7 +29,7 @@ export default function BrowserMoviesScreen() {
       <SearchHeader search={search} onSearch={handleSearch} />
 
       {isLoading ? (
-        <SearchMoviesSkeleton />
+        <MovieListVerticalSkeleton />
       ) : (
         <FlatList
           data={movies}

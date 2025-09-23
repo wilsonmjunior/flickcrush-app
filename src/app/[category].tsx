@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native-unistyles';
 
 import { useGetLatestMovies, useGetPopularMovies, useGetUpcomingMovies } from '@/core/api/queries';
 import { MovieBrowserCard } from '@/features/movies/components';
-import { Loading } from '@/shared/components/common';
+import { Loading, MovieListVerticalSkeleton } from '@/shared/components/common';
 import { Header } from '@/shared/components/ui';
 
 export default function MovieCategoryScreen() {
@@ -17,18 +17,21 @@ export default function MovieCategoryScreen() {
     hasNextPage: hasNextPageUpcoming,
     fetchNextPage: fetchNextPageUpcoming,
     isFetchingNextPage: isFetchingNextPageUpcoming,
+    isLoading: isLoadingUpcoming,
   } = useGetUpcomingMovies(category === 'upcoming');
   const {
     data: latestDataMovies,
     hasNextPage: hasNextPageLatest,
     fetchNextPage: fetchNextPageLatest,
     isFetchingNextPage: isFetchingNextPageLatest,
+    isLoading: isLoadingLatest,
   } = useGetLatestMovies(category === 'latest');
   const {
     data: popularDataMovies,
     hasNextPage: hasNextPagePopular,
     fetchNextPage: fetchNextPagePopular,
     isFetchingNextPage: isFetchingNextPagePopular,
+    isLoading: isLoadingPopular,
   } = useGetPopularMovies(category === 'popular');
 
   const movies = useMemo(() => {
@@ -86,6 +89,17 @@ export default function MovieCategoryScreen() {
     }
   }, [category]);
 
+  const isLoading = useMemo(() => {
+    switch (category) {
+      case 'upcoming':
+        return isLoadingUpcoming;
+      case 'latest':
+        return isLoadingLatest;
+      case 'popular':
+        return isLoadingPopular;
+    }
+  }, [category, isLoadingUpcoming, isLoadingLatest, isLoadingPopular]);
+
   return (
     <SafeAreaView style={styles.container}>
       <Header>
@@ -94,23 +108,27 @@ export default function MovieCategoryScreen() {
         <Header.ActionButton />
       </Header>
 
-      <FlatList
-        data={movies}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <MovieBrowserCard movie={item} />}
-        style={styles.list}
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-        onEndReached={() => {
-          if (hasNextPage) {
-            onNextPage?.();
+      {isLoading ? (
+        <MovieListVerticalSkeleton />
+      ) : (
+        <FlatList
+          data={movies}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <MovieBrowserCard movie={item} />}
+          style={styles.list}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+          onEndReached={() => {
+            if (hasNextPage) {
+              onNextPage?.();
+            }
+          }}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={() =>
+            isFetchingNextPage ? <Loading text="Carregando mais filmes..." /> : null
           }
-        }}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={() =>
-          isFetchingNextPage ? <Loading text="Carregando mais filmes..." /> : null
-        }
-      />
+        />
+      )}
     </SafeAreaView>
   );
 }
