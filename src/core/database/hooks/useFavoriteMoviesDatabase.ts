@@ -1,10 +1,6 @@
 import { useSQLiteContext } from 'expo-sqlite';
 
-import {
-  WatchedMovieResponseSchema,
-  WatchedMovieSchema,
-  WatchedMovieSchemaType,
-} from '@/core/database';
+import { WatchedMovieResponseSchema, WatchedMovieSchema, WatchedMovieSchemaType } from '../schemas';
 
 export function useFavoriteMoviesDatabase() {
   const database = useSQLiteContext();

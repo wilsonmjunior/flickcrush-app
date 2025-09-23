@@ -2,8 +2,8 @@ import { useRouter } from 'expo-router';
 import { FlatList, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { MovieCard } from '@/features/movies/components';
 import { Button, Text } from '@/shared/components/ui';
+import { MovieCard } from './MovieCard';
 
 type MovieListProps<T> = {
   data: T & { id: number }[];

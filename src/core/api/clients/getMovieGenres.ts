@@ -1,5 +1,6 @@
 import { MovieGenreResponseSchema } from '@/core/api/schemas/MovieGenreScheme';
-import { TMDBAPIError, tmdbClient } from '.';
+import { tmdbClient } from './tmdbApi';
+import { TMDBAPIError } from './tmdbApiError';
 
 export async function getMovieGenres() {
   try {

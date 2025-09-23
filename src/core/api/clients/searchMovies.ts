@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 import { MovieSchema } from '@/core/api/schemas/MovieSchema';
-import { TMDBAPIError, tmdbClient } from '.';
+import { tmdbClient } from './tmdbApi';
+import { TMDBAPIError } from './tmdbApiError';
 
 const SearchMoviesSchema = z.object({
   results: z.array(MovieSchema),

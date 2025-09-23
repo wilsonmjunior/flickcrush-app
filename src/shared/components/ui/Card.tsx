@@ -3,7 +3,7 @@ import { Dimensions, TouchableOpacity, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { SizeToken } from '@/core/theme';
-import { Text, TextProps } from '.';
+import { Text, TextProps } from './Text';
 
 const { width: screenWidth } = Dimensions.get('window');
 

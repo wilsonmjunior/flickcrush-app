@@ -1,6 +1,6 @@
 import { MovieDetailsSchema } from '@/core/api/schemas/MovieDetailsSchema';
-import { TMDBAPIError } from '.';
 import { tmdbClient } from './tmdbApi';
+import { TMDBAPIError } from './tmdbApiError';
 
 export async function getMovieDetails(id: number) {
   try {

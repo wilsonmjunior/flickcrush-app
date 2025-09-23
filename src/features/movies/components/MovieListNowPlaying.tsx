@@ -2,8 +2,8 @@ import { useRouter } from 'expo-router';
 import { FlatList, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { MovieCard } from '@/features/movies/components';
 import { Text } from '@/shared/components/ui';
+import { MovieCard } from './MovieCard';
 
 type MovieListNowPlayingProps = {
   data: any;

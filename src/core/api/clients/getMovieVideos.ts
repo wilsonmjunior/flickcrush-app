@@ -1,5 +1,6 @@
 import { MovieVideoResponseSchema } from '@/core/api/schemas/MovieVideoSchema';
-import { TMDBAPIError, tmdbClient } from '.';
+import { tmdbClient } from './tmdbApi';
+import { TMDBAPIError } from './tmdbApiError';
 
 export async function getMovieVideos(movieId: number) {
   try {
